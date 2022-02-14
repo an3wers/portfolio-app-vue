@@ -22,3 +22,9 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+<!-- 
+   // "serve": "vue-cli-service serve",
+    // "build": "vue-cli-service build",
+ -->

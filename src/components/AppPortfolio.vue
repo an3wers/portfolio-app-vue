@@ -3,7 +3,14 @@
     <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-4">
+          <img
+            v-if="portfolio.image"
+            :src="portfolio.image"
+            class="img-fluid rounded-start"
+            alt="..."
+          />
           <svg
+            v-else
             class="bd-placeholder-img img-fluid rounded-start"
             width="100%"
             height="200"
@@ -17,41 +24,40 @@
             <rect width="100%" height="100%" fill="#868e96"></rect>
             <text x="40%" y="50%" fill="#dee2e6" dy=".3em">Image</text>
           </svg>
-          <!-- <img
-                  src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                  class="img-fluid rounded-start"
-                  alt="..."
-                /> -->
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title">Name</h5>
+            <h5 class="card-title">{{ portfolio.name }}</h5>
             <p class="card-text">
-              <small class="text-muted">Job title</small>
+              <small class="text-muted">{{ portfolio.job }}</small>
             </p>
           </div>
         </div>
       </div>
     </div>
     <div class="card mb-3">
-      <div class="card-body">
-        <div class="card-body__profile-descr">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum ea,
-          repudiandae harum dolores culpa dolorem in cum porro dicta debitis hic
-          consequuntur enim similique facilis doloremque tempora beatae maiores
-          autem.
+      <div v-if="portfolio.description.length > 0" class="card-body">
+        <div
+          v-for="(descr, index) in portfolio.description"
+          :key="index"
+          class="card-body__profile-descr"
+        >
+          {{ descr }}
         </div>
-        <div class="card-body__profile-descr">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum ea,
-          repudiandae harum dolores culpa dolorem in cum porro dicta debitis hic
-          consequuntur enim similique facilis doloremque tempora beatae maiores
-          autem.
-        </div>
+      </div>
+      <div v-else class="card-body">
+        <div style="color:#cccccc; text-align:center">Описание еще не добавлено</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    portfolio: {
+      type: Object,
+    },
+  },
+};
 </script>
