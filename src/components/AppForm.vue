@@ -15,7 +15,7 @@
             <option value="s-decription">Описание</option>
           </select>
           <textarea
-            v-model="form.text"
+            v-model.trim="form.text"
             class="form-control mb-3"
             id="textarea"
             rows="3"

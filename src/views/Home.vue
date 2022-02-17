@@ -7,7 +7,10 @@
       >
       <div class="row">
         <app-form @submit="updatePortfolio"></app-form>
-        <app-portfolio :portfolio="portfolio"></app-portfolio>
+        <app-portfolio
+          @savePortfolio="saveToLS"
+          :portfolio="portfolio"
+        ></app-portfolio>
       </div>
     </div>
   </div>
@@ -25,8 +28,8 @@ export default {
   data() {
     return {
       portfolio: {
-        name: "Test name",
-        job: "Test job",
+        name: null,
+        job: null,
         image: null,
         description: [],
       },
@@ -67,6 +70,20 @@ export default {
     updateDescription(value) {
       this.portfolio.description.push(value);
     },
+    saveToLS() {
+      localStorage.setItem("portfolio", JSON.stringify(this.portfolio));
+    },
+  },
+  mounted() {
+    const currentPortfolio = localStorage.getItem("portfolio");
+    // console.log(currentPortfolio)
+    if (currentPortfolio !== null) {
+      try {
+        this.portfolio = JSON.parse(currentPortfolio);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 };
 </script>

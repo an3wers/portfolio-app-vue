@@ -1,6 +1,13 @@
 <template>
   <div class="col-lg-8">
-    <div class="card mb-3">
+    <div v-if="!portfolio.name" class="card mb-3">
+      <div class="card-body">
+        <div style="color: #cccccc; text-align: center">
+          Пользователь еще не добавлен
+        </div>
+      </div>
+    </div>
+    <div v-else class="card mb-3">
       <div class="row g-0">
         <div class="col-md-4">
           <img
@@ -46,9 +53,18 @@
         </div>
       </div>
       <div v-else class="card-body">
-        <div style="color:#cccccc; text-align:center">Описание еще не добавлено</div>
+        <div style="color: #cccccc; text-align: center">
+          Описание еще не добавлено
+        </div>
       </div>
     </div>
+    <button
+      @click="$emit('savePortfolio')"
+      :disabled="!portfolio.name"
+      class="btn btn-lg btn-primary"
+    >
+      Сохранить
+    </button>
   </div>
 </template>
 
@@ -59,5 +75,26 @@ export default {
       type: Object,
     },
   },
+
+  emits: ["savePortfolio"],
+
+  // methods: {
+  //   savePortfolioToLs() {
+  //     // console.log(JSON.stringify(this.portfolio))
+  //     localStorage.setItem('portfolio', JSON.stringify(this.portfolio))
+  //   }
+  // },
+
+  // mounted() {
+  //   const currentPortfolio = localStorage.getItem('portfolio')
+  //   // console.log(currentPortfolio)
+  //   if (currentPortfolio !== null) {
+  //     try {
+  //       // this.portfolio = JSON.parse(currentPortfolio)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+  // }
 };
 </script>
